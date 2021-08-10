@@ -106,7 +106,7 @@ class AuthOAuthView(SupersetAuthOAuthView):
         state = self.generate_state()
         stateString = state.decode('utf-8')
         data = {'redirect_url': redirect_url}
-        
+        loggin.debug(f'redirect-uri:{redirect_url}')
         #session new authlib
         session[f'_state_{provider}_{stateString}'] = {'data': data}
 
