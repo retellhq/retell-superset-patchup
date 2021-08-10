@@ -104,6 +104,10 @@ class AuthOAuthView(SupersetAuthOAuthView):
         session['%s_oauthredir' % provider] = redirect_url
 
         state = self.generate_state()
+
+        #session new authlib
+        session[f'_state_openlmis_{state}'] = redirect_url
+
         return make_response(jsonify(
             isAuthorized=False,
             state=state
