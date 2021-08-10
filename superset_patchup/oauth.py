@@ -105,9 +105,10 @@ class AuthOAuthView(SupersetAuthOAuthView):
 
         state = self.generate_state()
         stateString = state.decode('utf-8')
+        data = {'redirect_url': redirect_url}
+        
         #session new authlib
-        logging.debug('10==' + f'_state_{provider}_{stateString}')
-        session[f'_state_{provider}_{stateString}'] = redirect_url
+        session[f'_state_{provider}_{stateString}'] = {'data': data}
 
         return make_response(jsonify(
             isAuthorized=False,
