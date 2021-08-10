@@ -106,6 +106,7 @@ class AuthOAuthView(SupersetAuthOAuthView):
         state = self.generate_state()
 
         #session new authlib
+        logging.debug('10==' + f'_state_openlmis_{state}')
         session[f'_state_openlmis_{state}'] = redirect_url
 
         return make_response(jsonify(
