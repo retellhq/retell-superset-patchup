@@ -109,7 +109,8 @@ class AuthOAuthView(SupersetAuthOAuthView):
         logging.debug(f'redirect-uri:{redirect_url}')
         #session new authlib
         session[f'_state_{provider}_{stateString}'] = {'data': data}
-
+        session['_openlmis_authlib_state_'] = {'state': stateString}
+        session['_openlmis_authlib_redirect_uri_'] = {'redirect_uri': redirect_url}
         pprint(session)
         return make_response(jsonify(
             isAuthorized=False,
