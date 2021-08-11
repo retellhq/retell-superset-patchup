@@ -18,7 +18,7 @@ from flask_login import login_user
 
 from superset_patchup.utils import is_safe_url, is_valid_provider
 
-
+from pprint import pprint
 class AuthOAuthView(SupersetAuthOAuthView):
     """ Flask-AppBuilder's Authentication OAuth view"""
     login_template = "appbuilder/general/security/login_oauth.html"
@@ -110,6 +110,7 @@ class AuthOAuthView(SupersetAuthOAuthView):
         #session new authlib
         session[f'_state_{provider}_{stateString}'] = {'data': data}
 
+        pprint(session)
         return make_response(jsonify(
             isAuthorized=False,
             state=state
