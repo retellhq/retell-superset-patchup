@@ -277,6 +277,22 @@ class CustomSecurityManager(SupersetSecurityManager):
         # above)
         email_base = app.config.get("PATCHUP_EMAIL_BASE")
 
+        if is_valid_provider(provider, "oauth"):
+            user = (self.appbuilder.sm.oauth_remotes[provider].get(
+                "api/v1/user.json", token=response).json())
+
+            user_data = (self.appbuilder.sm.oauth_remotes[provider].get(
+                f"connect/userinfo", token=response).json())
+
+            return {
+                "name": user_data["name"],
+                "email": user_data["email"],
+                "id": user_data["id"],
+                "username": user["username"],
+                "first_name": user_data["given_name"],
+                "last_name": user_data["name"],
+            }
+
         if is_valid_provider(provider, "onadata"):
             user = (self.appbuilder.sm.oauth_remotes[provider].get(
                 "api/v1/user.json", token=response).json())
