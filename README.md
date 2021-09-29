@@ -9,8 +9,8 @@ Superset-patchup is meant to be installed alongside Superset.
 This can be done this way:
 
 ```sh
-# to install version 0.1.0
-pip install git+https://github.com/onaio/superset-patchup.git@v0.1.0
+# to install version 0.2.2
+pip install git+https://github.com/retellhq/retell-superset-patchup.git@v0.2.2
 ```
 
 Once installed, you would need to modify the `superset_config.py` to configure Superset using Superset-patchup.
