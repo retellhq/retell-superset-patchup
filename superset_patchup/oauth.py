@@ -279,13 +279,12 @@ class CustomSecurityManager(SupersetSecurityManager):
 
         if is_valid_provider(provider, "oauth"):
             user_data = (self.appbuilder.sm.oauth_remotes[provider].get(
-                f"connect/userinfo", token=response).json())
-
+                f"connect/userinfo").json())
+            logging.debug(" user_data: %s", user_data)
             return {
                 "name": user_data["name"],
                 "email": user_data["email"],
-                "id": user_data["id"],
-                "username": user["username"],
+                "username": user_data["email"],
                 "first_name": user_data["given_name"],
                 "last_name": user_data["name"],
             }
