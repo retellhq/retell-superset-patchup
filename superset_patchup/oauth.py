@@ -264,7 +264,7 @@ class CustomSecurityManager(SupersetSecurityManager):
     # pylint: disable=too-many-locals
     def oauth_user_info(self, provider, response=None):
         """Get user info"""
-
+        logging.debug("Provider: {0}.".format(provider))
         # dirty hack.  We need to load the app from here because at the top
         # of the file superset is not yet initialized with an app property
         from superset import app  # pylint: disable=import-outside-toplevel
